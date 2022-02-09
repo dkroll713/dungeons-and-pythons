@@ -172,7 +172,7 @@ def fight():
     time.sleep(2)
     print("\n FIGHT")
     fight = True
-    round = 0
+    round = 1
     while fight is True:
         if a.speed > b.speed:
             # Turn based combat
@@ -193,12 +193,17 @@ def fight():
 
             if b_avoid > a.speed:
                 a_dmg = 0
-                print("\nThe attack missed.")
+                print("\n         The attack missed.")
             elif(a_dmg == 0):
-                print("\nThey successfully blocked your attack.")
+                print("\n         "+b.name+" successfully blocked your attack.")
             else:
                 block_amount = b.defense*random.choice(block_values)
-                b.hit_points = b.hit_points + (block_amount) - a_dmg
+                if block_amount >= a_dmg:
+                    block_amount = a_dmg
+                    print("\n         The attack may be blocked")
+                else:
+                    pass
+                b.hit_points = b.hit_points + block_amount - a_dmg
                 print("\nYou hit "+b.name+" for "+str(a_dmg)+", but they blocked "+str(block_amount))
 
 
@@ -214,7 +219,7 @@ def fight():
             time.sleep(2)
 
 
-            print("\n Your opponent managed a hit.")
+            print("\n Your opponent attacks.")
             b_dmg = multiply(b.attack,random.choice(range(0,6)))
             a_avoid = (a.defense + a.speed)*random.choice(avoid_values)
             # time.sleep(2)
@@ -226,13 +231,18 @@ def fight():
 
             if a_avoid > b.speed:
                 b_dmg = 0
-                print("\nThe attack missed.")
+                print("\n         The attack missed.")
             elif(b_dmg == 0):
-                print("\nYou successfully blocked their attack.")
+                print("\n         You successfully blocked "+b.name+"'s' attack.")
             else:
                 block_amount = a.defense*random.choice(block_values)
-                a.hit_points = a.hit_points + (block_amount) - b_dmg
-                print("\nYou  were hit  for "+str(b_dmg)+", but blocked "+str(block_amount))
+                if block_amount >= b_dmg:
+                    block_amount = b_dmg
+                    print("\n         The attack may be blocked")
+                else:
+                    pass
+                a.hit_points = a.hit_points + block_amount - b_dmg
+                print("\nYou were hit for "+str(b_dmg)+", but blocked "+str(block_amount))
 
 
             time.sleep(2)
@@ -275,12 +285,17 @@ def fight():
 
             if a_avoid > b.speed:
                 b_dmg = 0
-                print("\nThe attack missed.")
+                print("\n         The attack missed.")
             elif(b_dmg == 0):
-                print("\nYou successfully blocked their attack.")
+                print("\n         You successfully blocked "+b.name+"'s' attack.")
             else:
                 block_amount = a.defense*random.choice(block_values)
-                a.hit_points = a.hit_points + (a.defense*random.choice(avoid_values)) - b_dmg
+                if block_amount >= b_dmg:
+                    block_amount = b_dmg
+                    print("\n         The attack may be blocked")
+                else:
+                    pass
+                a.hit_points = a.hit_points + block_amount - b_dmg
                 print("\nYou were hit for "+str(b_dmg)+", but blocked "+str(block_amount))
             time.sleep(2)
 
@@ -306,12 +321,17 @@ def fight():
 
             if b_avoid > a.speed:
                 a_dmg = 0
-                print("\nThe attack missed.")
+                print("\n         The attack missed.")
             elif(a_dmg == 0):
-                print("\nThey successfully blocked your attack.")
+                print("\n         "+b.name+" successfully blocked your attack.")
             else:
                 block_amount = b.defense*random.choice(block_values)
-                b.hit_points = b.hit_points + (block_amount) - a_dmg
+                if block_amount >= a_dmg:
+                    block_amount = a_dmg
+                    print("\n         The attack may be blocked")
+                else:
+                    pass
+                b.hit_points = b.hit_points + block_amount - a_dmg
                 print("\nYou hit "+b.name+" for "+str(a_dmg)+", but they blocked "+str(block_amount))
 
 
