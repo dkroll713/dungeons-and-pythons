@@ -58,11 +58,11 @@ class Fighter:
         self.status = status
 
     def save(self):
-        with open("save.pk1", "wb") as fp:
-            pickle.dump(self, fp, protocol=pickle.HIGHEST_PROTOCOL)
+        with open("save.pkl", "wb") as fp:
+            pickle.dump(characterFile, fp, pickle.HIGHEST_PROTOCOL)
 
 def load():
-    with open("save.pk1", "rb") as fp:
+    with open("save.pkl", "rb") as fp:
         return pickle.load(fp)
 
 class Opponent:
@@ -78,9 +78,24 @@ class Opponent:
 
 a = Fighter
 b = Opponent
+characterFile = a
+
+def start():
+    print("\nWelcome to DUNGEONS AND PYTHONS")
+    x = False
+    start = input("\nWould you like to create a new character or load a save? \nType \"create\" or \"load\": ")
+    while x == False:
+        if start.lower() == "create":
+            create()
+            x = True
+        elif start.lower() == "load":
+            print(load().__dict__)
+            a = load().__dict__
+            x = True
+        else:
+            start = input("Type \"create\" to make a new character or \"load\" to load a saved character: ")
 
 def create():
-    print("Welcome to DUNGEONS AND PYTHONS")
     print("\nChoose your character:")
     a.name = input("\nName: ")
     a.attack = int(input("\nChoose your attack stat, 1-10: "))
@@ -90,12 +105,19 @@ def create():
     a.pet = False
     a.status = True
 
-    # print(a.name)
-    # print(a.attack)
-    # print(a.defense)
-    # print(a.hit_points)
-    # if a.status is True:
-    #     print("It's ALIIIIIIIIIIVE")
+    printSelf()
+    x = False
+    sv = input("\nWould you like to save this character?\nType \"yes\" or \"no\": ")
+    while x == False:
+        if sv.lower() == "yes":
+            characterFile.save(characterFile)
+            x = True
+            pass
+        elif sv.lower() == "no":
+            x = True
+            pass
+        else:
+            sv = input("\nType \"yes\" or \"no\": ")
 
 def create_opponents():
     b.name = random.choice(names)
@@ -296,7 +318,8 @@ def fight():
                 break
             input("\nPress enter to advance to the next round")
 
-create()
+start()
 create_opponents()
 # create_tournament_fighters()
-fight()
+# print(load().__dict__)
+# fight()
