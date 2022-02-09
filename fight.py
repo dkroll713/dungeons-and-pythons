@@ -57,13 +57,22 @@ class Fighter:
         self.pet = pet
         self.status = status
 
-    def save(self):
-        with open("save.pkl", "wb") as fp:
-            pickle.dump(characterFile, fp, pickle.HIGHEST_PROTOCOL)
+def save(self):
+    with open("save.pkl", "wb") as fp:
+        pickle.dump(saveFile, fp, pickle.HIGHEST_PROTOCOL)
 
 def load():
     with open("save.pkl", "rb") as fp:
         return pickle.load(fp)
+
+def assignLoad():
+    a.name = load()["name"]
+    a.attack = load()["attack"]
+    a.defense = load()["defense"]
+    a.hit_points = load()["hit points"]
+    a.speed = load()["speed"]
+    a.pet = load()["pet"]
+    a.status = load()["status"]
 
 class Opponent:
     type = 'Opponent'
@@ -89,8 +98,8 @@ def start():
             create()
             x = True
         elif start.lower() == "load":
-            print(load().__dict__)
-            a = load().__dict__
+            load()
+            assignLoad()
             x = True
         else:
             start = input("Type \"create\" to make a new character or \"load\" to load a saved character: ")
@@ -110,7 +119,17 @@ def create():
     sv = input("\nWould you like to save this character?\nType \"yes\" or \"no\": ")
     while x == False:
         if sv.lower() == "yes":
-            characterFile.save(characterFile)
+            saveFile = {
+                "name" : a.name,
+                "attack" : a.attack,
+                "defense" : a.defense,
+                "hit points" : a.hit_points,
+                "speed" : a.speed,
+                "pet" : a.pet,
+                "status" : a.status
+            }
+            with open("save.pkl", "wb") as fp:
+                pickle.dump(saveFile, fp, pickle.HIGHEST_PROTOCOL)
             x = True
             pass
         elif sv.lower() == "no":
@@ -321,5 +340,4 @@ def fight():
 start()
 create_opponents()
 # create_tournament_fighters()
-# print(load().__dict__)
-# fight()
+fight()
