@@ -1,6 +1,6 @@
 # dungeons-and-pythons
 
-Dungeons and Pythons is a silly text-based rpg based loosely on dungeon-crawlers like Diablo 2, text-based games like Zork, and rpg's like D&D.
+Dungeons and Pythons is a silly text-based rpg based loosely on dungeon-crawlers like Diablo 2, text-based games like Zork, and tabletop rpg's like D&D.
 
 The goal isn't to make an awesome game (though hopefully that happens); the goal is to demonstrate knowledge & proficiency with different elements of the Python programming language.
 
