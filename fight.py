@@ -10,7 +10,7 @@ hit_point_values = [3,4,5]
 ads_values = [1,2,3,4,5,6,7,8,9,10]
 avoid_values = [.1,.2,.3,.4,.5,.6]
 block_values = [.6, .7, .8, .9, 1, 1.1, 1.2, 1.3, 1.4, 1.5]
-names = ['Dad', 'Mom', 'Joe', 'John', 'Toohey', 'Earle', 'Drake', 'Tripp', 'X']
+names = ['Sam', 'Ridge', 'Eli', 'Jon', 'William', 'Brandon', 'Joe', 'John', 'Toohey', 'Earle', 'Drake', 'Tripp', 'X']
 
 def printSelf():
     print("\n")
@@ -96,13 +96,28 @@ def start():
     while x == False:
         if start.lower() == "create":
             create()
+            create_opponents()
             x = True
         elif start.lower() == "load":
             load()
             assignLoad()
+            create_opponents()
             x = True
         else:
             start = input("Type \"create\" to make a new character or \"load\" to load a saved character: ")
+
+def select():
+    x = input("\nDo you want to do a single fight or a tournament?\nType \"fight\" or \"tournament\": ")
+    y = False
+    while y == False:
+        if x.lower() == "fight":
+            fight()
+            y = True
+        elif x.lower() == "tournament":
+            tournament()
+            y = True
+        else:
+            print("wrong answer dumbass")
 
 def create():
     print("\nChoose your character:")
@@ -160,6 +175,10 @@ def create_tournament_fighters():
         print(vars(fighters[y]))
         y = y+1
 
+def choose_fighters():
+    print(vars(fighters[0]))
+
+
 #_dmg = damage points : attack stat * d6
 #_resist = applied defense : if def > dmg then reduced damage
 #_avoid = applied speed : if avoid > opponent speed, then attack is avoided
@@ -204,7 +223,7 @@ def fight():
                 else:
                     pass
                 b.hit_points = b.hit_points + block_amount - a_dmg
-                print("\nYou hit "+b.name+" for "+str(a_dmg)+", but they blocked "+str(block_amount))
+                print("\n         You hit "+b.name+" for "+str(a_dmg)+", but they blocked "+str(block_amount))
 
 
             time.sleep(2)
@@ -242,7 +261,7 @@ def fight():
                 else:
                     pass
                 a.hit_points = a.hit_points + block_amount - b_dmg
-                print("\nYou were hit for "+str(b_dmg)+", but blocked "+str(block_amount))
+                print("\n         You were hit for "+str(b_dmg)+", but blocked "+str(block_amount))
 
 
             time.sleep(2)
@@ -296,7 +315,7 @@ def fight():
                 else:
                     pass
                 a.hit_points = a.hit_points + block_amount - b_dmg
-                print("\nYou were hit for "+str(b_dmg)+", but blocked "+str(block_amount))
+                print("\n         You were hit for "+str(b_dmg)+", but blocked "+str(block_amount))
             time.sleep(2)
 
 
@@ -332,7 +351,7 @@ def fight():
                 else:
                     pass
                 b.hit_points = b.hit_points + block_amount - a_dmg
-                print("\nYou hit "+b.name+" for "+str(a_dmg)+", but they blocked "+str(block_amount))
+                print("\n         You hit "+b.name+" for "+str(a_dmg)+", but they blocked "+str(block_amount))
 
 
             time.sleep(2)
@@ -357,7 +376,25 @@ def fight():
                 break
             input("\nPress enter to advance to the next round")
 
+def tournament():
+    x = input("\nHow many fighters would you like to face?: ")
+    y = 1
+    while y <= int(x):
+        print("\nBattle "+str(y)+" of "+x)
+        hitpointmax = a.hit_points
+        create_opponents()
+
+        fight()
+        a.hit_points = hitpointmax
+        print("\nEnd of battle "+str(y))
+        time.sleep(1)
+        print("\nRefilling your health. . . .")
+        time.sleep(1)
+        print("\n Loading . . .")
+        y = y+1
+        time.sleep(2)
+    print("Congratulations on winning the tournament you big nerd")
 start()
-create_opponents()
-# create_tournament_fighters()
-fight()
+select()
+# tournament()
+# fight()
