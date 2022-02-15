@@ -8,7 +8,7 @@ The goal isn't to make an awesome game (though hopefully that happens); the goal
 * rooms2.py - test module where room concept was first proven
 * playerandroom3.py - fully functional dungeon-running module. Dynamically generates dungeon rooms & lets player run to end of each; no monsters, not yet incorporated into separates .py files, & it's very barebones, but it works!!
 
-Wishlist:
+Wishlist (crossed out items have been achieved):
 * character classes (barbarian, wizard, ranger, cyborg)
   * improves replayability
   * use of subclasses & superclasses
