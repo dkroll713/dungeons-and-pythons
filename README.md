@@ -5,7 +5,8 @@ Dungeons and Pythons is a silly text-based rpg based loosely on dungeon-crawlers
 The goal isn't to make an awesome game (though hopefully that happens); the goal is to demonstrate knowledge & proficiency with different elements of the Python programming language.
 
 subclasses.py - creates functional dictionaries containing places & rooms
-createDungeon.py - for some reason creates a list instead of a dictionary??
+rooms2.py - test module where room concept was first proven
+playerandroom3.py - fully functional dungeon-running module; no monsters, not yet incorporated into separates .py files, & it's very barebones, but it works!!
 
 Wishlist:
 * character classes (barbarian, wizard, ranger, cyborg)
