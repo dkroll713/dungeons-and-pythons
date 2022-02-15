@@ -15,7 +15,9 @@ Wishlist:
   * interactions between various classes, demonstrates competency in super/sub class programming
 * text-based navigation (typing 'go north', 'open door', or 'search chest')
   * game logic, demonstrates ability to write & understand complex code
-* dynamically generated dungeons (start at point x, navigate to the end)
-  * self-generating instances
+* ~~dynamically generated dungeons (start at point x, navigate to the end)
+  * ~~self-generating instances
+  * easy, medium, hard, insane modes
+  * stores between dungeons to spend gold in
 * a story/campaign
   * demonstrates ability to write proficiently & craft an easily digestible narrative
