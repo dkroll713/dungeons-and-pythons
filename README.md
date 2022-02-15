@@ -10,8 +10,10 @@ The goal isn't to make an awesome game (though hopefully that happens); the goal
 
 Wishlist:
 * character classes (barbarian, wizard, ranger, cyborg)
+  * improves replayability
   * use of subclasses & superclasses
 * items (weapons, potions, gold, tools)
+  * adds depth to each game mode
   * interactions between various classes, demonstrates competency in super/sub class programming
 * text-based navigation (typing 'go north', 'open door', or 'search chest')
   * game logic, demonstrates ability to write & understand complex code
