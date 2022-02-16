@@ -19,7 +19,9 @@ Dungeons and Pythons is a silly text-based rpg based loosely on dungeon-crawlers
 # Wishlist:
 (crossed out items have been achieved)
 * character classes (barbarian, wizard, ranger, cyborg)
-  * improves replayability
+  * ~~character saves & load saved characters~~
+  * add equipable items e.g. "big sword", "scavenged shield/armor", "BFG", that boost attack or defense, or are single-use instant kills etc.
+  * add pets that provide similar boosts e.g. "goldendoodle" boosts speed, "narwahl" boosts attack
 * items (weapons, potions, gold, tools)
   * adds depth to each game mode
 * text-based navigation (typing 'go north', 'open door', or 'search chest')
