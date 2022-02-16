@@ -6,7 +6,7 @@ The goal isn't to make an awesome game (though hopefully that happens); the goal
 
 * fight.py - original module containing battle code
 * subclasses.py - creates functional dictionaries containing places & rooms
-* * /separates/ - folder containing simplified modules for elegance
+* /separates/ - folder containing simplified modules for elegance
 * /separates/rooms2.py - test module where room concept was first proven
 * /separates/playerandroom3.py - fully functional dungeon-running module. Dynamically generates dungeon rooms & lets player run to end of each; contains monsters
 
@@ -16,14 +16,15 @@ Wishlist (crossed out items have been achieved):
 * items (weapons, potions, gold, tools)
   * adds depth to each game mode
 * text-based navigation (typing 'go north', 'open door', or 'search chest')
-  * game logic, demonstrates ability to write & understand complex code
   * add fighting to dungeon-running module
   * then add dungeon-running to standalone "select game mode" module
-* ~~dynamically generated dungeons (start at point x, navigate to the end)~~
+* dynamically generated dungeons (start at point x, navigate to the end)
   * ~~self-generating instances~~
-  * ~~easy~~, medium, hard, insane modes
-  * stores between dungeons to spend gold in
-   * health potions to refill, strong weapons, pets to boost stats
+  * add fighting to dungeon-running module
+  * add item_spawner in dungeon-running module to spawn equipable items, searchable items, & lore items
+  * ~~easy~~, medium, ~~hard~~, insane modes
+  * add stores between dungeons to spend gold in
+  * add health potions to refill, strong weapons, pets to boost stats
 * a story/campaign
   * demonstrates ability to write proficiently & craft an easily digestible narrative
 
