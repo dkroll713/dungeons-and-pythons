@@ -29,7 +29,9 @@ Wishlist (crossed out items have been achieved):
 
 
 Most recent updates:
+
 2/16/22
+
 * added a "generate_monster" method to the "generate_rooms" method - now when rooms are generated, a dynamic number of monsters are generated & saved with each room as "room.monster_list".
 * added a "place_monster" method that iterates over map grid & places monsters down at specified coordinates
 * added a "monster_move" method that runs after "player_move" in the dungeon runner - based on easy or hard mode, monsters will either move wander/pursue player, or pursue the player
