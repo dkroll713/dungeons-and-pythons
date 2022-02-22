@@ -31,6 +31,10 @@ total_monsters = random.randrange(min_monsters,max_monsters)
 monster_names = ['Bulbous Goblin']
 monster_attack = [1,2,3,4,5]
 monster_defense = [2,3,4]
+hit_point_values = [3,4,5]
+ads_values = [1,2,3,4,5,6,7,8,9,10]
+avoid_values = [.1,.2,.3,.4,.5,.6]
+block_values = [.6, .7, .8, .9, 1, 1.1, 1.2, 1.3, 1.4, 1.5]
 # room creation stats & dicts
 
 class Monster:
@@ -528,7 +532,7 @@ def monster_move(current_room):
                                     current_monster['monster_posY'] = current_mon_posY
                             moveYet = True
                 # else if the vertical distance is greater than the horizontal distance
-                elif xdif < ydif:
+                elif xdif <= ydif:
                     # if player is below the monster
                     if ydif > 0:
                         print("Monster",current_monster['monster_id'],"is moving down")
@@ -802,6 +806,10 @@ def fight():
                 break
             input("\nPress enter to advance to the next round")
 
+def multiply(x,y):
+    return x*y
+
+
 def dungeon_run():
     for r in rooms:
         complete = False
@@ -835,19 +843,23 @@ def dungeon_run():
                 # print(current_monster_list[m])
                 if player_coords == monster_coords:
                     print("uh oh, it touched you")
-                    b = Monster()
                     b.name = current_monster_list[m]['monster_name']
                     b.attack = current_monster_list[m]['monster_attack']
                     b.defense = current_monster_list[m]['monster_defense']
                     b.hit_points = current_monster_list[m]['monster_hit_points']
                     b.speed = current_monster_list[m]['monster_speed']
+                    b.pet = False
                     fight()
 
                     if b.hit_points <=0:
                         current_monster_list[m]['monster_alive'] = False
+                        print("before deletion")
+                        print(current_monster_list)
 
                 if current_monster_list[m]['monster_alive'] == False:
                     del current_monster_list[m]
+                    print("after deletion")
+                    print(current_monster_list)
                 m = m+1
 
             if (a.posX,a.posY) == current_room_door:
