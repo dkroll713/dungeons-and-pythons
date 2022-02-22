@@ -52,6 +52,8 @@ class Monster:
             "monster_status" : self.monster_status
         }
 
+b = Monster()
+
 class Room():
     def __init__(self):
         print("Creating room")
