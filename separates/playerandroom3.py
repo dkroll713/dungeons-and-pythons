@@ -3,9 +3,9 @@ from classes import Fighter
 from classes import Opponent
 import time
 
-f = Fighter("David",10,10,100,10,False,True)
-f.posX = 1
-f.posY = 1
+a = Fighter("David",10,10,100,10,False,True)
+a.posX = 1
+a.posY = 1
 # now have a fighter with positon (posX,posY)
 
 difficulty = input("Type easy or hard: ")
@@ -178,7 +178,8 @@ def generate_monsters(room):
             "monster_speed" : monster.monster_speed,
             "monster_status" : monster.monster_status,
             "monster_posX" : monster.posX,
-            "monster_posY" : monster.posY
+            "monster_posY" : monster.posY,
+            "monster_alive" : True
             })
 
 def print_room_map(room,r):
@@ -189,22 +190,19 @@ def print_room_map(room,r):
 
 def place_player():
     for r in rooms:
-        print("\nAdding player position at",(f.posX,f.posY))
+        print("\nAdding player position at",(a.posX,a.posY))
         current_room = rooms[r]
         current_room_width = current_room['room_width']
         current_room_height = current_room['room_height']
         current_room_map = current_room['room_map']
-        f.posX = random.randrange(1,current_room_width-1)
-        f.posY = random.randrange(1,current_room_height-1)
-        # print(current_room)
-        # print((f.posX,f.posY))
+        a.posX = random.randrange(1,current_room_width-1)
+        a.posY = random.randrange(1,current_room_height-1)
         for sy in range(current_room_height):
             for sx in range(current_room_width):
-                current_room_map[f.posX,f.posY] = " @ "
+                current_room_map[a.posX,a.posY] = " @ "
                 rooms[r]['room_map'] = current_room_map
-                rooms[r]['posX'] = f.posX
-                rooms[r]['posY'] = f.posY
-        # print(current_room)
+                rooms[r]['posX'] = a.posX
+                rooms[r]['posY'] = a.posY
         print_room_map(current_room,r)
 
 def place_monster():
@@ -220,7 +218,6 @@ def place_monster():
             current_monster = current_room['monster_list'][mo]
             current_mon_posX = current_monster['monster_posX']
             current_mon_posY = current_monster['monster_posY']
-            # print(current_monster)
             mo = mo+1
 
             for sy in range(current_room_height):
@@ -237,20 +234,20 @@ def move_up(current_room,r):
     current_room_width = current_room['room_width']
     current_room_height = current_room['room_height']
     current_room_map = current_room['room_map']
-    f.posX = rooms[r]['posX']
-    f.posY = rooms[r]['posY']
-    if current_room_map[f.posX,f.posY-1] == " # ":
+    a.posX = rooms[r]['posX']
+    a.posY = rooms[r]['posY']
+    if current_room_map[a.posX,a.posY-1] == " # ":
         print("You can't move that way")
     else:
         print("move up")
-        f.posY = f.posY-1
-        print((f.posX,f.posY))
+        a.posY = a.posY-1
+        print((a.posX,a.posY))
         for sy in range(current_room_height):
             for sx in range(current_room_width):
-                current_room_map[f.posX,f.posY] = " @ "
-                current_room_map[f.posX,f.posY+1] = "   "
-                current_room['posX'] = f.posX
-                current_room['posY'] = f.posY
+                current_room_map[a.posX,a.posY] = " @ "
+                current_room_map[a.posX,a.posY+1] = "   "
+                current_room['posX'] = a.posX
+                current_room['posY'] = a.posY
                 rooms[r]['room_map'] = current_room_map
         print(r)
 
@@ -259,20 +256,20 @@ def move_down(current_room,r):
     current_room_width = current_room['room_width']
     current_room_height = current_room['room_height']
     current_room_map = current_room['room_map']
-    f.posX = rooms[r]['posX']
-    f.posY = rooms[r]['posY']
-    if current_room_map[f.posX,f.posY+1] == " # ":
+    a.posX = rooms[r]['posX']
+    a.posY = rooms[r]['posY']
+    if current_room_map[a.posX,a.posY+1] == " # ":
         print("You can't move that way")
     else:
         print("move down")
-        f.posY = f.posY+1
-        print((f.posX,f.posY))
+        a.posY = a.posY+1
+        print((a.posX,a.posY))
         for sy in range(current_room_height):
             for sx in range(current_room_width):
-                current_room_map[f.posX,f.posY] = " @ "
-                current_room_map[f.posX,f.posY-1] = "   "
-                current_room['posX'] = f.posX
-                current_room['posY'] = f.posY
+                current_room_map[a.posX,a.posY] = " @ "
+                current_room_map[a.posX,a.posY-1] = "   "
+                current_room['posX'] = a.posX
+                current_room['posY'] = a.posY
                 rooms[r]['room_map'] = current_room_map
         print(r)
 
@@ -281,20 +278,20 @@ def move_left(current_room,r):
     current_room_width = current_room['room_width']
     current_room_height = current_room['room_height']
     current_room_map = current_room['room_map']
-    f.posX = rooms[r]['posX']
-    f.posY = rooms[r]['posY']
-    if current_room_map[f.posX-1,f.posY] == " # ":
+    a.posX = rooms[r]['posX']
+    a.posY = rooms[r]['posY']
+    if current_room_map[a.posX-1,a.posY] == " # ":
         print("You can't move that way - left")
     else:
         print("move left")
-        f.posX = f.posX-1
-        print((f.posX,f.posY))
+        a.posX = a.posX-1
+        print((a.posX,a.posY))
         for sy in range(current_room_height):
             for sx in range(current_room_width):
-                current_room_map[f.posX,f.posY] = " @ "
-                current_room_map[f.posX+1,f.posY] = "   "
-                current_room['posX'] = f.posX
-                current_room['posY'] = f.posY
+                current_room_map[a.posX,a.posY] = " @ "
+                current_room_map[a.posX+1,a.posY] = "   "
+                current_room['posX'] = a.posX
+                current_room['posY'] = a.posY
                 rooms[r]['room_map'] = current_room_map
         print(r)
 
@@ -303,20 +300,20 @@ def move_right(current_room,r):
     current_room_width = current_room['room_width']
     current_room_height = current_room['room_height']
     current_room_map = current_room['room_map']
-    f.posX = rooms[r]['posX']
-    f.posY = rooms[r]['posY']
-    if current_room_map[f.posX+1,f.posY] == " # ":
+    a.posX = rooms[r]['posX']
+    a.posY = rooms[r]['posY']
+    if current_room_map[a.posX+1,a.posY] == " # ":
         print("You can't move that way - right")
     else:
         print("move right")
-        f.posX = f.posX+1
-        print((f.posX,f.posY))
+        a.posX = a.posX+1
+        print((a.posX,a.posY))
         for sy in range(current_room_height):
             for sx in range(current_room_width):
-                current_room_map[f.posX,f.posY] = " @ "
-                current_room_map[f.posX-1,f.posY] = "   "
-                current_room['posX'] = f.posX
-                current_room['posY'] = f.posY
+                current_room_map[a.posX,a.posY] = " @ "
+                current_room_map[a.posX-1,a.posY] = "   "
+                current_room['posX'] = a.posX
+                current_room['posY'] = a.posY
                 rooms[r]['room_map'] = current_room_map
         print(r)
 
@@ -325,12 +322,16 @@ def reroll():
     roll_move = random.choice(dice_move)
     return roll_move
 
-def monster_move(current_room,r):
+def monster_move(current_room):
+    # declares room width, height, & map so that function can place monster in new spot on existing room
+    # uses room passed when function is called
     current_room_width = current_room['room_width']
     current_room_height = current_room['room_height']
     current_room_map = current_room['room_map']
+
+    # sets counter equal to zero
+    # for each monster in the list of monsters in the room, run "move"
     mo = 0
-    # print_room_map(current_room,r)
     for monster in current_room['monster_list']:
         time.sleep(.5)
         dice_move = [1,2,3,4,5,6,7,8,9]
@@ -338,210 +339,466 @@ def monster_move(current_room,r):
         current_mon_posX = current_monster['monster_posX']
         current_mon_posY = current_monster['monster_posY']
         roll_move = random.choice(dice_move)
-        # print(roll_move)
         moveYet = False
-        if difficulty == "easy":
-            while moveYet == False:
+        if current_monster['monster_alive']:
+            if difficulty == "easy":
+                while moveYet == False:
 
-                time.sleep(1)
-                print(roll_move)
-                if roll_move == 1:
-                    # dice roll - moving up
-                    print("Monster",current_monster['monster_id'],"is moving aimlessly")
-                    # print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
-                    newCoords = current_room_map[current_mon_posX,current_mon_posY-1]
-                    if not newCoords == " # " or newCoords == " @ ":
-                        current_mon_posY = current_mon_posY-1
-                        for sy in range(current_room_height):
-                            for sx in range(current_room_width):
-                                current_room_map[current_mon_posX,current_mon_posY] = " * "
-                                current_room_map[current_mon_posX,current_mon_posY+1] = "   "
-                                current_monster['monster_posX'] = current_mon_posX
-                                current_monster['monster_posY'] = current_mon_posY
+                    time.sleep(1)
+                    print(roll_move)
+                    if roll_move == 1:
+                        # dice roll - moving up
+                        print("Monster",current_monster['monster_id'],"is moving aimlessly")
+                        # print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
+                        newCoords = current_room_map[current_mon_posX,current_mon_posY-1]
+                        if not newCoords == " # " or newCoords == " @ ":
+                            current_mon_posY = current_mon_posY-1
+                            for sy in range(current_room_height):
+                                for sx in range(current_room_width):
+                                    current_room_map[current_mon_posX,current_mon_posY] = " * "
+                                    current_room_map[current_mon_posX,current_mon_posY+1] = "   "
+                                    current_monster['monster_posX'] = current_mon_posX
+                                    current_monster['monster_posY'] = current_mon_posY
+                            moveYet = True
+                        else:
+                            reroll()
+                            return roll_move
+                    if roll_move == 2:
+                        print("Monster",current_monster['monster_id'],"is moving aimlessly")
+                        # print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
+                        newCoords = current_room_map[current_mon_posX,current_mon_posY+1]
+                        if not newCoords == " # " or newCoords == " @ ":
+                            current_mon_posY = current_mon_posY+1
+                            for sy in range(current_room_height):
+                                for sx in range(current_room_width):
+                                    current_room_map[current_mon_posX,current_mon_posY] = " * "
+                                    current_room_map[current_mon_posX,current_mon_posY-1] = "   "
+                                    current_monster['monster_posX'] = current_mon_posX
+                                    current_monster['monster_posY'] = current_mon_posY
+                            moveYet = True
+                        else:
+                            reroll()
+                            return roll_move
+                    if roll_move == 3:
+                        print("Monster",current_monster['monster_id'],"is moving aimlessly")
+                        # print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
+                        newCoords = current_room_map[current_mon_posX-1,current_mon_posY]
+                        if not newCoords == " # " or newCoords == " @ ":
+                            current_mon_posX = current_mon_posX-1
+                            for sy in range(current_room_height):
+                                for sx in range(current_room_width):
+                                    current_room_map[current_mon_posX,current_mon_posY] = " * "
+                                    current_room_map[current_mon_posX+1,current_mon_posY] = "   "
+                                    current_monster['monster_posX'] = current_mon_posX
+                                    current_monster['monster_posY'] = current_mon_posY
+                            moveYet = True
+                        else:
+                            reroll()
+                            return roll_move
+                    if roll_move == 4:
+                        print("Monster",current_monster['monster_id'],"is moving aimlessly")
+                        # print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
+                        newCoords = current_room_map[current_mon_posX+1,current_mon_posY]
+                        if not newCoords == " # " or newCoords == " @ ":
+                            current_mon_posX = current_mon_posX+1
+                            for sy in range(current_room_height):
+                                for sx in range(current_room_width):
+                                    current_room_map[current_mon_posX,current_mon_posY] = " * "
+                                    current_room_map[current_mon_posX-1,current_mon_posY] = "   "
+                                    current_monster['monster_posX'] = current_mon_posX
+                                    current_monster['monster_posY'] = current_mon_posY
+                            moveYet = True
+                        else:
+                            reroll()
+                            return roll_move
+                    if roll_move == 5:
+                        print("The monster stares menacingly . . .")
                         moveYet = True
-                    else:
-                        reroll()
-                        return roll_move
-                if roll_move == 2:
-                    print("Monster",current_monster['monster_id'],"is moving aimlessly")
-                    # print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
-                    newCoords = current_room_map[current_mon_posX,current_mon_posY+1]
-                    if not newCoords == " # " or newCoords == " @ ":
-                        current_mon_posY = current_mon_posY+1
-                        for sy in range(current_room_height):
-                            for sx in range(current_room_width):
-                                current_room_map[current_mon_posX,current_mon_posY] = " * "
-                                current_room_map[current_mon_posX,current_mon_posY-1] = "   "
-                                current_monster['monster_posX'] = current_mon_posX
-                                current_monster['monster_posY'] = current_mon_posY
-                        moveYet = True
-                    else:
-                        reroll()
-                        return roll_move
-                if roll_move == 3:
-                    print("Monster",current_monster['monster_id'],"is moving aimlessly")
-                    # print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
-                    newCoords = current_room_map[current_mon_posX-1,current_mon_posY]
-                    if not newCoords == " # " or newCoords == " @ ":
-                        current_mon_posX = current_mon_posX-1
-                        for sy in range(current_room_height):
-                            for sx in range(current_room_width):
-                                current_room_map[current_mon_posX,current_mon_posY] = " * "
-                                current_room_map[current_mon_posX+1,current_mon_posY] = "   "
-                                current_monster['monster_posX'] = current_mon_posX
-                                current_monster['monster_posY'] = current_mon_posY
-                        moveYet = True
-                    else:
-                        reroll()
-                        return roll_move
-                if roll_move == 4:
-                    print("Monster",current_monster['monster_id'],"is moving aimlessly")
-                    # print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
-                    newCoords = current_room_map[current_mon_posX+1,current_mon_posY]
-                    if not newCoords == " # " or newCoords == " @ ":
-                        current_mon_posX = current_mon_posX+1
-                        for sy in range(current_room_height):
-                            for sx in range(current_room_width):
-                                current_room_map[current_mon_posX,current_mon_posY] = " * "
-                                current_room_map[current_mon_posX-1,current_mon_posY] = "   "
-                                current_monster['monster_posX'] = current_mon_posX
-                                current_monster['monster_posY'] = current_mon_posY
-                        moveYet = True
-                    else:
-                        reroll()
-                        return roll_move
-                if roll_move == 5:
-                    print("The monster stares menacingly . . .")
-                    moveYet = True
-                    pass
-                if roll_move == 6 or roll_move == 7 or roll_move == 8\
-                or roll_move == 9:
-                    xdif = f.posX - current_mon_posX
-                    ydif = f.posY - current_mon_posY
+                        pass
+                    if roll_move == 6 or roll_move == 7 or roll_move == 8\
+                    or roll_move == 9:
+                        xdif = a.posX - current_mon_posX
+                        ydif = a.posY - current_mon_posY
 
-                    if xdif > ydif or ydif == 0:
-                        if xdif >= 0:
-                            print("Monster",current_monster['monster_id'],"is moving towards you")
-                            # print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
-                            newCoords = current_room_map[current_mon_posX+1,current_mon_posY]
-                            if not newCoords == " # " or newCoords == " @ ":
-                                current_mon_posX = current_mon_posX+1
-                                for sy in range(current_room_height):
-                                    for sx in range(current_room_width):
-                                        current_room_map[current_mon_posX,current_mon_posY] = " * "
-                                        current_room_map[current_mon_posX-1,current_mon_posY] = "   "
-                                        current_monster['monster_posX'] = current_mon_posX
-                                        current_monster['monster_posY'] = current_mon_posY
-                                moveYet = True
-                        elif xdif < 0:
-                            print("Monster",current_monster['monster_id'],"is moving towards you")
-                            # print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
-                            newCoords = current_room_map[current_mon_posX-1,current_mon_posY]
-                            if not newCoords == " # " or newCoords == " @ ":
-                                current_mon_posX = current_mon_posX-1
-                                for sy in range(current_room_height):
-                                    for sx in range(current_room_width):
-                                        current_room_map[current_mon_posX,current_mon_posY] = " * "
-                                        current_room_map[current_mon_posX+1,current_mon_posY] = "   "
-                                        current_monster['monster_posX'] = current_mon_posX
-                                        current_monster['monster_posY'] = current_mon_posY
-                                moveYet = True
-                    elif xdif < ydif or xdif == 0:
-                        if ydif >= 0:
-                            print("Monster",current_monster['monster_id'],"is moving towards you")
-                            # print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
-                            newCoords = current_room_map[current_mon_posX,current_mon_posY+1]
-                            if not newCoords == " # " or newCoords == " @ ":
-                                current_mon_posY = current_mon_posY+1
-                                for sy in range(current_room_height):
-                                    for sx in range(current_room_width):
-                                        current_room_map[current_mon_posX,current_mon_posY] = " * "
-                                        current_room_map[current_mon_posX,current_mon_posY-1] = "   "
-                                        current_monster['monster_posX'] = current_mon_posX
-                                        current_monster['monster_posY'] = current_mon_posY
-                                moveYet = True
-                        elif ydif < 0:
-                            print("Monster",current_monster['monster_id'],"is moving towards you")
-                            # print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
-                            newCoords = current_room_map[current_mon_posX,current_mon_posY-1]
-                            if not newCoords == " # " or newCoords == " @ ":
-                                current_mon_posY = current_mon_posY-1
-                                for sy in range(current_room_height):
-                                    for sx in range(current_room_width):
-                                        current_room_map[current_mon_posX,current_mon_posY] = " * "
-                                        current_room_map[current_mon_posX,current_mon_posY+1] = "   "
-                                        current_monster['monster_posX'] = current_mon_posX
-                                        current_monster['monster_posY'] = current_mon_posY
-                                moveYet = True
-        if difficulty == "hard":
-            xdif = f.posX - current_mon_posX
-            ydif = f.posY - current_mon_posY
-            print("\nPlayer coordinates:",(f.posX,f.posY))
-            print("\nMonster coordinates:",(current_mon_posX,current_mon_posY))
-            print("If xcoord result is positive, monster is to the left; if negative, monster is to the right")
-            print("xdif = ",f.posX - current_mon_posX)
-            print("If ycoord result is positive, monster is above; if negative, monster is below")
-            print("ydif", f.posY - current_mon_posY)
-            if xdif > ydif or ydif == 0:
-                if xdif >= 0:
-                    print("Monster",current_monster['monster_id'],"is moving right")
-                    print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
-                    newCoords = current_room_map[current_mon_posX+1,current_mon_posY]
-                    if not newCoords == " # " or newCoords == " @ ":
-                        current_mon_posX = current_mon_posX+1
-                        for sy in range(current_room_height):
-                            for sx in range(current_room_width):
-                                current_room_map[current_mon_posX,current_mon_posY] = " * "
-                                current_room_map[current_mon_posX-1,current_mon_posY] = "   "
-                                current_monster['monster_posX'] = current_mon_posX
-                                current_monster['monster_posY'] = current_mon_posY
-                        moveYet = True
-                elif xdif < 0:
-                    print("Monster",current_monster['monster_id'],"is moving left")
-                    print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
-                    newCoords = current_room_map[current_mon_posX-1,current_mon_posY]
-                    if not newCoords == " # " or newCoords == " @ ":
-                        current_mon_posX = current_mon_posX-1
-                        for sy in range(current_room_height):
-                            for sx in range(current_room_width):
-                                current_room_map[current_mon_posX,current_mon_posY] = " * "
-                                current_room_map[current_mon_posX+1,current_mon_posY] = "   "
-                                current_monster['monster_posX'] = current_mon_posX
-                                current_monster['monster_posY'] = current_mon_posY
-                        moveYet = True
-            elif xdif < ydif or xdif == 0:
-                if ydif >= 0:
-                    print("Monster",current_monster['monster_id'],"is moving down")
-                    print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
-                    newCoords = current_room_map[current_mon_posX,current_mon_posY+1]
-                    if not newCoords == " # " or newCoords == " @ ":
-                        current_mon_posY = current_mon_posY+1
-                        for sy in range(current_room_height):
-                            for sx in range(current_room_width):
-                                current_room_map[current_mon_posX,current_mon_posY] = " * "
-                                current_room_map[current_mon_posX,current_mon_posY-1] = "   "
-                                current_monster['monster_posX'] = current_mon_posX
-                                current_monster['monster_posY'] = current_mon_posY
-                        moveYet = True
-                elif ydif < 0:
-                    print("Monster",current_monster['monster_id'],"is moving up")
-                    print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
-                    newCoords = current_room_map[current_mon_posX,current_mon_posY-1]
-                    if not newCoords == " # " or newCoords == " @ ":
-                        current_mon_posY = current_mon_posY-1
-                        for sy in range(current_room_height):
-                            for sx in range(current_room_width):
-                                current_room_map[current_mon_posX,current_mon_posY] = " * "
-                                current_room_map[current_mon_posX,current_mon_posY+1] = "   "
-                                current_monster['monster_posX'] = current_mon_posX
-                                current_monster['monster_posY'] = current_mon_posY
-                        moveYet = True
-        # print(current_monster,(current_mon_posX,current_mon_posY))
+                        if xdif > ydif or ydif == 0:
+                            if xdif >= 0:
+                                print("Monster",current_monster['monster_id'],"is moving towards you")
+                                # print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
+                                newCoords = current_room_map[current_mon_posX+1,current_mon_posY]
+                                if not newCoords == " # " or newCoords == " @ ":
+                                    current_mon_posX = current_mon_posX+1
+                                    for sy in range(current_room_height):
+                                        for sx in range(current_room_width):
+                                            current_room_map[current_mon_posX,current_mon_posY] = " * "
+                                            current_room_map[current_mon_posX-1,current_mon_posY] = "   "
+                                            current_monster['monster_posX'] = current_mon_posX
+                                            current_monster['monster_posY'] = current_mon_posY
+                                    moveYet = True
+                            elif xdif < 0:
+                                print("Monster",current_monster['monster_id'],"is moving towards you")
+                                # print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
+                                newCoords = current_room_map[current_mon_posX-1,current_mon_posY]
+                                if not newCoords == " # " or newCoords == " @ ":
+                                    current_mon_posX = current_mon_posX-1
+                                    for sy in range(current_room_height):
+                                        for sx in range(current_room_width):
+                                            current_room_map[current_mon_posX,current_mon_posY] = " * "
+                                            current_room_map[current_mon_posX+1,current_mon_posY] = "   "
+                                            current_monster['monster_posX'] = current_mon_posX
+                                            current_monster['monster_posY'] = current_mon_posY
+                                    moveYet = True
+                        elif xdif < ydif or xdif == 0:
+                            if ydif >= 0:
+                                print("Monster",current_monster['monster_id'],"is moving towards you")
+                                # print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
+                                newCoords = current_room_map[current_mon_posX,current_mon_posY+1]
+                                if not newCoords == " # " or newCoords == " @ ":
+                                    current_mon_posY = current_mon_posY+1
+                                    for sy in range(current_room_height):
+                                        for sx in range(current_room_width):
+                                            current_room_map[current_mon_posX,current_mon_posY] = " * "
+                                            current_room_map[current_mon_posX,current_mon_posY-1] = "   "
+                                            current_monster['monster_posX'] = current_mon_posX
+                                            current_monster['monster_posY'] = current_mon_posY
+                                    moveYet = True
+                            elif ydif < 0:
+                                print("Monster",current_monster['monster_id'],"is moving towards you")
+                                # print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
+                                newCoords = current_room_map[current_mon_posX,current_mon_posY-1]
+                                if not newCoords == " # " or newCoords == " @ ":
+                                    current_mon_posY = current_mon_posY-1
+                                    for sy in range(current_room_height):
+                                        for sx in range(current_room_width):
+                                            current_room_map[current_mon_posX,current_mon_posY] = " * "
+                                            current_room_map[current_mon_posX,current_mon_posY+1] = "   "
+                                            current_monster['monster_posX'] = current_mon_posX
+                                            current_monster['monster_posY'] = current_mon_posY
+                                    moveYet = True
+            if difficulty == "hard":
+                xdif = a.posX - current_mon_posX
+                ydif = a.posY - current_mon_posY
+                print("\nPlayer coordinates:",(a.posX,a.posY))
+                print("\nMonster coordinates:",(current_mon_posX,current_mon_posY))
+                print("\nIf xcoord result is positive, monster is to the left; if negative, monster is to the right")
+                print("xdif = ",a.posX - current_mon_posX)
+                print("\nIf ycoord result is positive, monster is above; if negative, monster is below")
+                print("ydif", a.posY - current_mon_posY)
+                # if the horizontal distance is greater than the vertical distance -
+                if xdif > ydif:
+                    # if player is to the right of the monster
+                    if xdif > 0:
+                        print("Monster",current_monster['monster_id'],"is moving right")
+                        print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
+                        newCoords = current_room_map[current_mon_posX+1,current_mon_posY]
+                        if not newCoords == " # " or newCoords == " @ ":
+                            current_mon_posX = current_mon_posX+1
+                            for sy in range(current_room_height):
+                                for sx in range(current_room_width):
+                                    current_room_map[current_mon_posX,current_mon_posY] = " * "
+                                    current_room_map[current_mon_posX-1,current_mon_posY] = "   "
+                                    current_monster['monster_posX'] = current_mon_posX
+                                    current_monster['monster_posY'] = current_mon_posY
+                            moveYet = True
+                    # if player is to the left of the monster
+                    elif xdif < 0:
+                        print("Monster",current_monster['monster_id'],"is moving left")
+                        print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
+                        newCoords = current_room_map[current_mon_posX-1,current_mon_posY]
+                        if not newCoords == " # " or newCoords == " @ ":
+                            current_mon_posX = current_mon_posX-1
+                            for sy in range(current_room_height):
+                                for sx in range(current_room_width):
+                                    current_room_map[current_mon_posX,current_mon_posY] = " * "
+                                    current_room_map[current_mon_posX+1,current_mon_posY] = "   "
+                                    current_monster['monster_posX'] = current_mon_posX
+                                    current_monster['monster_posY'] = current_mon_posY
+                            moveYet = True
+                    # if player is in same column as the monster, move up
+                    elif xdif == 0:
+                        newCoords = current_room_map[current_mon_posX,current_mon_posY-1]
+                        if not newCoords == " # " or newCoords == " @ ":
+                            current_mon_posY = current_mon_posY-1
+                            for sy in range(current_room_height):
+                                for sx in range(current_room_width):
+                                    current_room_map[current_mon_posX,current_mon_posY] = " * "
+                                    current_room_map[current_mon_posX,current_mon_posY+1] = "   "
+                                    current_monster['monster_posX'] = current_mon_posX
+                                    current_monster['monster_posY'] = current_mon_posY
+                            moveYet = True
+                # else if the vertical distance is greater than the horizontal distance
+                elif xdif < ydif:
+                    # if player is below the monster
+                    if ydif > 0:
+                        print("Monster",current_monster['monster_id'],"is moving down")
+                        print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
+                        newCoords = current_room_map[current_mon_posX,current_mon_posY+1]
+                        if not newCoords == " # " or newCoords == " @ ":
+                            current_mon_posY = current_mon_posY+1
+                            for sy in range(current_room_height):
+                                for sx in range(current_room_width):
+                                    current_room_map[current_mon_posX,current_mon_posY] = " * "
+                                    current_room_map[current_mon_posX,current_mon_posY-1] = "   "
+                                    current_monster['monster_posX'] = current_mon_posX
+                                    current_monster['monster_posY'] = current_mon_posY
+                            moveYet = True
+                    # else if the player is above the monster
+                    elif ydif < 0:
+                        print("Monster",current_monster['monster_id'],"is moving up")
+                        print("Current monster coordinates:",(current_mon_posX,current_mon_posY))
+                        newCoords = current_room_map[current_mon_posX,current_mon_posY-1]
+                        if not newCoords == " # " or newCoords == " @ ":
+                            current_mon_posY = current_mon_posY-1
+                            for sy in range(current_room_height):
+                                for sx in range(current_room_width):
+                                    current_room_map[current_mon_posX,current_mon_posY] = " * "
+                                    current_room_map[current_mon_posX,current_mon_posY+1] = "   "
+                                    current_monster['monster_posX'] = current_mon_posX
+                                    current_monster['monster_posY'] = current_mon_posY
+                            moveYet = True
+                    # else if the player is in the same row as the monster
+                    elif ydif == 0:
+                        newCoords = current_room_map[current_mon_posX-1,current_mon_posY]
+                        if not newCoords == " # " or newCoords == " @ ":
+                            current_mon_posX = current_mon_posX-1
+                            for sy in range(current_room_height):
+                                for sx in range(current_room_width):
+                                    current_room_map[current_mon_posX,current_mon_posY] = " * "
+                                    current_room_map[current_mon_posX+1,current_mon_posY] = "   "
+                                    current_monster['monster_posX'] = current_mon_posX
+                                    current_monster['monster_posY'] = current_mon_posY
+                            moveYet = True
         mo = mo+1
 
 def print_room(current_room):
     print("\nRoom created at",current_room['coords'],"with",current_room['room_size'],"size.",\
     current_room['room_height'],"cells high and",current_room['room_width'],"cells wide.")
+
+def printSelf():
+    print("\n")
+    print("Your fighter: "+str(a.name))
+    time.sleep(.5)
+    print("Attack stat: "+str(a.attack))
+    time.sleep(.5)
+    print("Defense stat: "+str(a.defense))
+    time.sleep(.5)
+    print("Speed stat: "+str(a.speed))
+    time.sleep(.5)
+    print("Hit points: "+str(a.hit_points))
+    time.sleep(.5)
+    if a.pet is True:
+        print("Has a pet")
+    else:
+        pass
+
+def printOpponent():
+    print("\n")
+    print("Your opponent: "+str(b.name))
+    time.sleep(.5)
+    print("Attack stat: "+str(b.attack))
+    time.sleep(.5)
+    print("Defense stat: "+str(b.defense))
+    time.sleep(.5)
+    print("Speed stat: "+str(b.speed))
+    time.sleep(.5)
+    print("Hit points: "+str(b.hit_points))
+    time.sleep(.5)
+    if b.pet is True:
+        print("Has a pet")
+    else:
+        pass
+
+def fight():
+    time.sleep(2)
+    printSelf()
+    time.sleep(2)
+    printOpponent()
+    time.sleep(2)
+    print("\n FIGHT")
+    fight = True
+    round = 1
+    while fight is True:
+        if a.speed > b.speed:
+            # Turn based combat
+            # User speed advantage
+            # User attack
+
+            print("\n -----Round ", round, "-----")
+            time.sleep(2)
+            print("\n You struck first!")
+            a_dmg = multiply(a.attack,random.choice(range(0,6)))
+            b_avoid = (b.defense + b.speed)*random.choice(avoid_values)
+            # time.sleep(2)
+            # print("\nYour damage points: "+str(a_dmg))
+            # time.sleep(2)
+            # print("Opponent's hit points: "+str(b.hit_points))
+            time.sleep(3)
+
+
+            if b_avoid > a.speed:
+                a_dmg = 0
+                print("\n         The attack missed.")
+            elif(a_dmg == 0):
+                print("\n         "+b.name+" successfully blocked your attack.")
+            else:
+                block_amount = b.defense*random.choice(block_values)
+                if block_amount >= a_dmg:
+                    block_amount = a_dmg
+                    print("\n         The attack may be blocked")
+                else:
+                    pass
+                b.hit_points = b.hit_points + block_amount - a_dmg
+                print("\n         You hit "+b.name+" for "+str(a_dmg)+", but they blocked "+str(block_amount))
+
+
+            time.sleep(2)
+
+
+            if b.hit_points <=0:
+                print("\n ~~~~~You win!~~~~~")
+                break
+            elif a.hit_points <=0:
+                print("\n ~~~~~You died:(~~~~~")
+                break
+            time.sleep(2)
+
+
+            print("\n Your opponent attacks.")
+            b_dmg = multiply(b.attack,random.choice(range(0,6)))
+            a_avoid = (a.defense + a.speed)*random.choice(avoid_values)
+            # time.sleep(2)
+            # print("\nOpponent damage points: "+str(b_dmg))
+            # time.sleep(2)
+            # print("Your hit points: "+str(a.hit_points))
+            time.sleep(3)
+
+
+            if a_avoid > b.speed:
+                b_dmg = 0
+                print("\n         The attack missed.")
+            elif(b_dmg == 0):
+                print("\n         You successfully blocked "+b.name+"'s' attack.")
+            else:
+                block_amount = a.defense*random.choice(block_values)
+                if block_amount >= b_dmg:
+                    block_amount = b_dmg
+                    print("\n         The attack may be blocked")
+                else:
+                    pass
+                a.hit_points = a.hit_points + block_amount - b_dmg
+                print("\n         You were hit for "+str(b_dmg)+", but blocked "+str(block_amount))
+
+
+            time.sleep(2)
+            time.sleep(2)
+            round = round+1
+            print("\nEnd of round!")
+            a.speed = random.choice(ads_values)
+            b.speed = random.choice(ads_values)
+            time.sleep(1.5)
+            printSelf()
+            print("\n Loading . . .")
+            time.sleep(4)
+            printOpponent()
+            print("\n Loading . . .")
+            time.sleep(4)
+
+
+            if b.hit_points <=0:
+                print("\n ~~~~~You win!~~~~~")
+                break
+            elif a.hit_points <=0:
+                print("\n ~~~~~You died:(~~~~~")
+                break
+            input("\nPress enter to advance to the next round")
+
+
+        else:
+
+            print("\n -----Round ", round,"-----")
+            time.sleep(2)
+            print("\n Your opponent is faster..")
+            b_dmg = multiply(b.attack,random.choice(range(0,6)))
+            a_avoid = (a.defense + a.speed)*random.choice(avoid_values)
+            # time.sleep(2)
+            # print("\nOpponent damage points: "+str(b_dmg))
+            # time.sleep(2)
+            # print("Your hit points: "+str(a.hit_points))
+            time.sleep(3)
+
+
+            if a_avoid > b.speed:
+                b_dmg = 0
+                print("\n         The attack missed.")
+            elif(b_dmg == 0):
+                print("\n         You successfully blocked "+b.name+"'s' attack.")
+            else:
+                block_amount = a.defense*random.choice(block_values)
+                if block_amount >= b_dmg:
+                    block_amount = b_dmg
+                    print("\n         The attack may be blocked")
+                else:
+                    pass
+                a.hit_points = a.hit_points + block_amount - b_dmg
+                print("\n         You were hit for "+str(b_dmg)+", but blocked "+str(block_amount))
+            time.sleep(2)
+
+
+            if b.hit_points <=0:
+                print("\n~~~~~You win!~~~~~")
+                break
+            elif a.hit_points <=0:
+                print("\n~~~~~You lose:(~~~~~")
+                break
+            time.sleep(2)
+
+
+            print("\n ..but you won't go down without a fight!")
+            a_dmg = multiply(a.attack,random.choice(range(0,6)))
+            b_avoid = (b.defense + b.speed)*random.choice(avoid_values)
+            # time.sleep(2)
+            # print("\nYour damage points: "+str(a_dmg))
+            # time.sleep(2)
+            # print("Opponent's hit points: "+str(b.hit_points))
+            time.sleep(3)
+
+
+            if b_avoid > a.speed:
+                a_dmg = 0
+                print("\n         The attack missed.")
+            elif(a_dmg == 0):
+                print("\n         "+b.name+" successfully blocked your attack.")
+            else:
+                block_amount = b.defense*random.choice(block_values)
+                if block_amount >= a_dmg:
+                    block_amount = a_dmg
+                    print("\n         The attack may be blocked")
+                else:
+                    pass
+                b.hit_points = b.hit_points + block_amount - a_dmg
+                print("\n         You hit "+b.name+" for "+str(a_dmg)+", but they blocked "+str(block_amount))
+
+
+            time.sleep(2)
+            round = round+1
+            print("\nEnd of round!")
+            a.speed = random.choice(ads_values)
+            b.speed = random.choice(ads_values)
+            time.sleep(1.5)
+            printSelf()
+            print("\n Loading . . .")
+            time.sleep(4)
+            printOpponent()
+            print("\n Loading . . .")
+            time.sleep(2.5)
+
+
+            if b.hit_points <=0:
+                print("\n ~~~~~You win!~~~~~")
+                break
+            elif a.hit_points <=0:
+                print("\n ~~~~~You died:(~~~~~")
+                break
+            input("\nPress enter to advance to the next round")
 
 def dungeon_run():
     for r in rooms:
@@ -553,8 +810,8 @@ def dungeon_run():
         current_room_height = current_room['room_height']
         current_room_map = current_room['room_map']
         current_room_door = current_room['door']
-        f.posX = rooms[r]['posX']
-        f.posY = rooms[r]['posY']
+        a.posX = rooms[r]['posX']
+        a.posY = rooms[r]['posY']
 
         current_monster_list = current_room['monster_list']
 
@@ -563,11 +820,35 @@ def dungeon_run():
             print()
             print_room_map(current_room,r)
             k = input("\nWhat would you like to do? ")
-            print("\nPlayer at",(f.posX,f.posY))
+            print("\nPlayer at",(a.posX,a.posY))
             print("\ndoor at",current_room_door)
 
+            player_coords = (a.posX,a.posY)
+            m = 0
+            if current_monster_list:
+                monster_coords = (current_monster_list[m]['monster_posX'],current_monster_list[m]['monster_posY'])
 
-            if (f.posX,f.posY) == current_room_door:
+            for monster in current_monster_list:
+                # print(m)
+                # print(current_monster_list[m])
+                if player_coords == monster_coords:
+                    print("uh oh, it touched you")
+                    b = Monster()
+                    b.name = current_monster_list[m]['monster_name']
+                    b.attack = current_monster_list[m]['monster_attack']
+                    b.defense = current_monster_list[m]['monster_defense']
+                    b.hit_points = current_monster_list[m]['monster_hit_points']
+                    b.speed = current_monster_list[m]['monster_speed']
+                    fight()
+
+                    if b.hit_points <=0:
+                        current_monster_list[m]['monster_alive'] = False
+
+                if current_monster_list[m]['monster_alive'] == False:
+                    del current_monster_list[m]
+                m = m+1
+
+            if (a.posX,a.posY) == current_room_door:
                 print("\nCongrats! You escaped room",str(r)+"!")
                 complete == True
                 r = r+1
@@ -575,36 +856,43 @@ def dungeon_run():
             else:
                 if k == "w" or 'up' in k:
                     move_up(current_room,r)
-                    if (f.posX,f.posY) == current_room_door:
+                    if (a.posX,a.posY) == current_room_door:
                         print("\nCongrats! You escaped room",str(r)+"!")
                         complete == True
                         r = r+1
                         break
                 elif k == "s" or 'down' in k:
                     move_down(current_room,r)
-                    if (f.posX,f.posY) == current_room_door:
+                    if (a.posX,a.posY) == current_room_door:
                         print("\nCongrats! You escaped room",str(r)+"!")
                         complete == True
                         r = r+1
                         break
                 elif k == "a" or 'left' in k:
                     move_left(current_room,r)
-                    if (f.posX,f.posY) == current_room_door:
+                    if (a.posX,a.posY) == current_room_door:
                         print("\nCongrats! You escaped room",str(r)+"!")
                         complete == True
                         r = r+1
                         break
                 elif k == "d" or 'right' in k:
                     move_right(current_room,r)
-                    if (f.posX,f.posY) == current_room_door:
+                    if (a.posX,a.posY) == current_room_door:
                         print("\nCongrats! You escaped room",str(r)+"!")
                         complete == True
                         r = r+1
                         break
                 else:
                     print(k)
-            print_room_map(current_room,r)
-            monster_move(current_room,r)
+            # print_room_map(current_room,r)
+            monster_move(current_room)
+
+
+            # print(player_coords)
+            # print(monster_coords)
+            # if player_coords == monster_coords:
+            #     current_monster_list[m]['monster_alive'] = False
+            #     print("uh oh, it touched you")
 
 
 
