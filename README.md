@@ -1,5 +1,11 @@
 # dungeons-and-pythons
 
+![image](https://user-images.githubusercontent.com/41023883/156897896-12bd6668-0b16-4423-994e-dfb31b00d855.png)
+
+@ = player
+
+\* = monster
+
 Dungeons and Pythons is a silly text-based rpg based loosely on dungeon-crawlers like Diablo 2, text-based games like Zork, and tabletop rpg's like D&D. The goal isn't to make an awesome game (though hopefully that happens); the goal is to demonstrate knowledge & proficiency with different elements of the Python programming language.
 
 ## How to play:
